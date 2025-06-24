@@ -1,5 +1,5 @@
 import 'package:desenvolvimento_flutter_iniciante/extensions/extensions.dart';
-import 'package:desenvolvimento_flutter_iniciante/pages/nova_pagina.dart';
+import 'package:desenvolvimento_flutter_iniciante/pages/criar_pessoa_page.dart';
 import 'package:desenvolvimento_flutter_iniciante/routes/routes.dart';
 import 'package:desenvolvimento_flutter_iniciante/widgets/lista_pessoas.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.greenAccent,
         onPressed: () {
           // Navigator.of(context).pushNamed(Routes.novaPagina);
-          context.pushNamed(Routes.novaPagina);
+          context.pushNamed(Routes.criarPessoaPage);
 
           // Navigator.of(context).pushAndRemoveUntil(
           //   MaterialPageRoute(

@@ -1,4 +1,4 @@
 class Routes {
   static String initialRoute = "/";
-  static String novaPagina = "/nova_pagina";
+  static String criarPessoaPage = "/criar_pessoa_page";
 }
