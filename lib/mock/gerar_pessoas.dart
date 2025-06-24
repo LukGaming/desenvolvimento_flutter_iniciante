@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:desenvolvimento_flutter_iniciante/models/pessoa.dart';
 import 'package:faker/faker.dart';
 
@@ -10,7 +8,7 @@ List<Pessoa> gerarPessoas(int quantidade) {
     (index) => Pessoa(
       id: index,
       nome: faker.person.name(),
-      altura: Random().nextInt(200),
+      altura: faker.randomGenerator.integer(200, min: 150),
       peso: faker.randomGenerator.decimal(min: 50, scale: 50),
     ),
   );
