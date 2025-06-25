@@ -1,4 +1,4 @@
-import 'package:desenvolvimento_flutter_iniciante/widgets/stateful_widget.dart';
+import 'package:desenvolvimento_flutter_iniciante/widgets/core/stateful_widget.dart';
 import 'package:flutter/material.dart';
 
 class MeuStatelessWidget extends StatefulWidget {

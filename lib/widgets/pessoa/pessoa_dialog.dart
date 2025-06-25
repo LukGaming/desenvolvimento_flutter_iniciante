@@ -1,7 +1,7 @@
 import 'package:desenvolvimento_flutter_iniciante/controllers/pessoa_controller.dart';
 import 'package:desenvolvimento_flutter_iniciante/extensions/extensions.dart';
 import 'package:desenvolvimento_flutter_iniciante/models/pessoa.dart';
-import 'package:desenvolvimento_flutter_iniciante/widgets/default_dialog_container.dart';
+import 'package:desenvolvimento_flutter_iniciante/widgets/core/default_dialog_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
