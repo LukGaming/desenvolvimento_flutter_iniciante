@@ -93,7 +93,7 @@ class _CriarPessoaPageState extends State<CriarPessoaPage> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (formKey.currentState?.validate() == true) {
-                          final criarPessoa = CriarPessoDto(
+                          final criarPessoa = CriarPessoaDto(
                             nome: nomeController.text,
                             altura: int.parse(alturaController.text),
                             peso: double.parse(
