@@ -1,5 +1,6 @@
 import 'package:desenvolvimento_flutter_iniciante/models/criar_pesso_dto.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CriarPessoaPage extends StatefulWidget {
   const CriarPessoaPage({super.key});
@@ -28,7 +29,7 @@ class _CriarPessoaPageState extends State<CriarPessoaPage> {
           child: Column(
             children: [
               TextFormField(
-                autovalidateMode: AutovalidateMode.always,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (value) {
                   if (value?.isEmpty == true) {
                     return "Por favor, preencha o nome.";
@@ -48,7 +49,11 @@ class _CriarPessoaPageState extends State<CriarPessoaPage> {
               ),
               gap,
               TextFormField(
-                autovalidateMode: AutovalidateMode.always,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d+[,]?\d{0,1}'))
+                ],
                 validator: (value) {
                   if (value?.isEmpty == true) {
                     return "Por favor, preencha o peso.";
@@ -57,13 +62,17 @@ class _CriarPessoaPageState extends State<CriarPessoaPage> {
                 },
                 controller: pesoController,
                 decoration: InputDecoration(
-                  label: Text("Peso"),
-                  border: OutlineInputBorder(),
-                ),
+                    label: Text("Peso"),
+                    border: OutlineInputBorder(),
+                    suffixText: "Kg (ex: 72,5)"),
               ),
               gap,
               TextFormField(
-                autovalidateMode: AutovalidateMode.always,
+                keyboardType: TextInputType.number,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
                 validator: (value) {
                   if (value?.isEmpty == true) {
                     return "Por favor, preencha a altura.";
@@ -74,6 +83,7 @@ class _CriarPessoaPageState extends State<CriarPessoaPage> {
                 decoration: InputDecoration(
                   label: Text("Altura"),
                   border: OutlineInputBorder(),
+                  suffixText: "Cm (Ex: 180)",
                 ),
               ),
               gap,
@@ -86,8 +96,11 @@ class _CriarPessoaPageState extends State<CriarPessoaPage> {
                           final criarPessoa = CriarPessoDto(
                             nome: nomeController.text,
                             altura: int.parse(alturaController.text),
-                            peso: double.parse(pesoController.text),
+                            peso: double.parse(
+                                pesoController.text.replaceAll(",", ".")),
                           );
+
+                          Navigator.of(context).pop(criarPessoa);
                         }
                       },
                       child: Text("Salvar"),
@@ -100,5 +113,13 @@ class _CriarPessoaPageState extends State<CriarPessoaPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    nomeController.dispose();
+    pesoController.dispose();
+    alturaController.dispose();
+    super.dispose();
   }
 }
