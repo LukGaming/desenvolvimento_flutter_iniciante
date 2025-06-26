@@ -1,32 +1,37 @@
+import 'package:desenvolvimento_flutter_iniciante/controllers/theme_controller.dart';
 import 'package:desenvolvimento_flutter_iniciante/routes/router.dart';
 import 'package:desenvolvimento_flutter_iniciante/routes/routes.dart';
+import 'package:desenvolvimento_flutter_iniciante/themes/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final themeController = GetIt.instance<ThemeController>();
+  @override
+  void initState() {
+    super.initState();
+    themeController.getTheme();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: Routes.initialRoute,
-      routes: routes,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        useMaterial3: false,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        textTheme: TextTheme(
-          titleSmall: TextStyle(color: Colors.red),
-          bodySmall: TextStyle(color: Colors.red),
-          bodyMedium: TextStyle(color: Colors.black),
-          displayMedium: TextStyle(color: Colors.red),
-          bodyLarge: TextStyle(color: Colors.red),
-          displaySmall: TextStyle(color: Colors.red),
-          titleLarge: TextStyle(color: Colors.red),
-          labelSmall: TextStyle(color: Colors.red),
-          headlineLarge: TextStyle(color: Colors.red),
-          titleMedium: TextStyle(
-              color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-      ),
+    return ListenableBuilder(
+      listenable: themeController,
+      builder: (context, child) {
+        return MaterialApp(
+          initialRoute: Routes.initialRoute,
+          routes: routes,
+          title: 'Flutter Demo',
+          theme: themeController.darkTheme == false ? lightTheme : darkTheme,
+        );
+      },
     );
   }
 }
