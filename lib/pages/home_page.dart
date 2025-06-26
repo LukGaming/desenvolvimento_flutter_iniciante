@@ -24,11 +24,23 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onPessoaMensagem() {
-    print(pessoaController.mensagemNotifier.value);
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.green,
+        content: Text(pessoaController.mensagemNotifier.value),
+      ),
+    );
   }
 
   void _onThemeMensagem() {
-    print(themeController.mensagemNotifier.value);
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.green,
+        content: Text(themeController.mensagemNotifier.value),
+      ),
+    );
   }
 
   @override

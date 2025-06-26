@@ -13,11 +13,16 @@ class ThemeController extends ChangeNotifier {
   ValueNotifier<String> mensagemNotifier = ValueNotifier("");
 
   void toggleTheme(bool value) async {
-    darkTheme = !darkTheme;
-    await sharedPreferences.setBool("theme", darkTheme);
-    mensagemNotifier.value =
-        "Tema mudado para ${darkTheme ? 'escuro' : 'claro'}.";
-    notifyListeners();
+    try {
+      throw Exception("Ocorreu um erro ao mudar tema");
+      darkTheme = !darkTheme;
+      await sharedPreferences.setBool("theme", darkTheme);
+      mensagemNotifier.value =
+          "Tema mudado para ${darkTheme ? 'escuro' : 'claro'}.";
+      notifyListeners();
+    } on Exception catch (error) {
+      mensagemNotifier.value = error.toString();
+    }
   }
 
   Future<void> getTheme() async {
