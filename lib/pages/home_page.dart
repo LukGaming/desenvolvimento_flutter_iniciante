@@ -1,6 +1,7 @@
 import 'package:desenvolvimento_flutter_iniciante/controllers/pessoa_controller.dart';
 import 'package:desenvolvimento_flutter_iniciante/controllers/theme_controller.dart';
 import 'package:desenvolvimento_flutter_iniciante/routes/routes.dart';
+import 'package:desenvolvimento_flutter_iniciante/states/messages_states.dart';
 import 'package:desenvolvimento_flutter_iniciante/widgets/pessoa/lista_pessoas.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -25,22 +26,43 @@ class _HomePageState extends State<HomePage> {
 
   void _onPessoaMensagem() {
     ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: Colors.green,
-        content: Text(pessoaController.mensagemNotifier.value),
-      ),
-    );
+    final value = pessoaController.mensagemNotifier.value;
+
+    if (value is SuccessMessage) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.green,
+          content: Text(value.message),
+        ),
+      );
+    } else if (value is ErrorMessage) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(value.message),
+        ),
+      );
+    }
   }
 
   void _onThemeMensagem() {
     ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: Colors.green,
-        content: Text(themeController.mensagemNotifier.value),
-      ),
-    );
+    final value = themeController.mensagemNotifier.value;
+    if (value is SuccessMessage) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.green,
+          content: Text(value.message),
+        ),
+      );
+    } else if (value is ErrorMessage) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red,
+          content: Text(value.message),
+        ),
+      );
+    }
   }
 
   @override
