@@ -1,7 +1,5 @@
 import 'package:desenvolvimento_flutter_iniciante/controllers/pessoa_controller.dart';
 import 'package:desenvolvimento_flutter_iniciante/controllers/theme_controller.dart';
-import 'package:desenvolvimento_flutter_iniciante/models/criar_pesso_dto.dart';
-import 'package:desenvolvimento_flutter_iniciante/models/pessoa.dart';
 import 'package:desenvolvimento_flutter_iniciante/routes/routes.dart';
 import 'package:desenvolvimento_flutter_iniciante/widgets/pessoa/lista_pessoas.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +15,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final pessoaController = GetIt.instance<PessoaController>();
   final ThemeController themeController = GetIt.instance<ThemeController>();
+
+  @override
+  void initState() {
+    themeController.mensagemNotifier.addListener(_onThemeMensagem);
+    pessoaController.mensagemNotifier.addListener(_onPessoaMensagem);
+    super.initState();
+  }
+
+  void _onPessoaMensagem() {
+    print(pessoaController.mensagemNotifier.value);
+  }
+
+  void _onThemeMensagem() {
+    print(themeController.mensagemNotifier.value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +72,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
+    pessoaController.mensagemNotifier.removeListener(_onPessoaMensagem);
+    themeController.mensagemNotifier.removeListener(_onThemeMensagem);
     super.dispose();
   }
 }
