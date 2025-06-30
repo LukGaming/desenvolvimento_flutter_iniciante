@@ -1,5 +1,5 @@
 class Pessoa {
-  final int id;
+  final String id;
   final String nome;
   final int altura;
   final double peso;
@@ -10,4 +10,13 @@ class Pessoa {
     required this.altura,
     required this.peso,
   });
+
+  factory Pessoa.fromJson(Map<String, dynamic> json) {
+    return Pessoa(
+      id: json["id"],
+      nome: json["nome"],
+      altura: json["altura"],
+      peso: json["peso"],
+    );
+  }
 }

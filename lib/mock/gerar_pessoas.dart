@@ -6,7 +6,7 @@ List<Pessoa> gerarPessoas(int quantidade) {
   return List.generate(
     quantidade,
     (index) => Pessoa(
-      id: index,
+      id: index.toString(),
       nome: faker.person.name(),
       altura: faker.randomGenerator.integer(200, min: 150),
       peso: faker.randomGenerator.decimal(min: 50, scale: 50),

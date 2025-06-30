@@ -8,4 +8,12 @@ class CriarPessoaDto {
     required this.altura,
     required this.peso,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "nome": nome,
+      "altura": altura,
+      "peso": peso,
+    };
+  }
 }
