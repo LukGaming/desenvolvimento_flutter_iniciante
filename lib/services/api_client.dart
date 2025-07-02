@@ -33,6 +33,27 @@ class ApiClient {
 
     throw Exception("Status code inválido");
   }
+
+  Future<void> delete(Pessoa pessoa) async {
+    final request = await dio.delete(
+      "http://192.168.1.106:3000/pessoas/${pessoa.id}",
+    );
+
+    if (request.statusCode != 200) {
+      throw Exception("Status code inválido");
+    }
+  }
+
+  Future<Pessoa> put(Pessoa pessoa) async {
+    final request = await dio.put(
+      "http://192.168.1.106:3000/pessoas/${pessoa.id}",
+      data: pessoa.toJson(),
+    );
+    if (request.statusCode == 200) {
+      return Pessoa.fromJson(request.data);
+    }
+    throw Exception("Status code invalido");
+  }
 }
 
 // Map<String, dynamic> pessoaJson = {
