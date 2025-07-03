@@ -3,10 +3,13 @@ import 'package:desenvolvimento_flutter_iniciante/models/pessoa.dart';
 import 'package:dio/dio.dart';
 
 class ApiClient {
-  final Dio dio = Dio();
+  final Dio dio;
+  final String apiUrl;
+
+  ApiClient({required this.dio, required this.apiUrl});
 
   Future<List<Pessoa>> get() async {
-    final request = await dio.get("http://192.168.1.106:3000/pessoas");
+    final request = await dio.get("$apiUrl/pessoas");
 
     if (request.statusCode == 200) {
       final data = request.data;
@@ -23,7 +26,7 @@ class ApiClient {
 
   Future<Pessoa> post(CriarPessoaDto criarPessoa) async {
     final request = await dio.post(
-      "http://192.168.1.106:3000/pessoas",
+      "$apiUrl/pessoas",
       data: criarPessoa.toJson(),
     );
 
@@ -36,7 +39,7 @@ class ApiClient {
 
   Future<void> delete(Pessoa pessoa) async {
     final request = await dio.delete(
-      "http://192.168.1.106:3000/pessoas/${pessoa.id}",
+      "$apiUrl/pessoas/${pessoa.id}",
     );
 
     if (request.statusCode != 200) {
@@ -46,7 +49,7 @@ class ApiClient {
 
   Future<Pessoa> put(Pessoa pessoa) async {
     final request = await dio.put(
-      "http://192.168.1.106:3000/pessoas/${pessoa.id}",
+      "$apiUrl/pessoas/${pessoa.id}",
       data: pessoa.toJson(),
     );
     if (request.statusCode == 200) {

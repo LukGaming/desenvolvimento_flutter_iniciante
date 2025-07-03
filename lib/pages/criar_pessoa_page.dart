@@ -134,8 +134,7 @@ class _CriarPessoaPageState extends State<CriarPessoaPage> {
                             await pessoaController
                                 .atualizarPessoa(pessoaAtualizada);
                           }
-
-                          Navigator.of(context).pop();
+                          if (context.mounted) Navigator.of(context).pop();
                         }
                       },
                       child: Text("Salvar"),
