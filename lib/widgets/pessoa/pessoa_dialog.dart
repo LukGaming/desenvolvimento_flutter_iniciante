@@ -35,7 +35,7 @@ class PessoaDialog extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
               onPressed: () async {
                 Navigator.of(context).pushNamed(
                   Routes.criarPessoaPage,
@@ -73,7 +73,10 @@ class PessoaDialog extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Informações do usuário"),
+            Text(
+              "Informações do usuário",
+              style: TextStyle(color: Colors.black),
+            ),
             SizedBox(height: 8),
             DefaultDialogContainer(
               child: Text("Id: ${pessoa.id}"),
